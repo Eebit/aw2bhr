@@ -1,0 +1,161 @@
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+# Vim temporary files
+*.swp
+
+# =========================
+# Operating System Files
+# =========================
+
+# OSX
+# =========================
+
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# =========================
+# Build Outputs
+# =========================
+
+*.gba
+*.elf
+*.map
+*.o
+src/*.asm
+*.dump
+tools/agbcc
+*.exe
+.dep
+*.4bpp
+*.8bpp
+*.gbapal
+*.4bpp.h
+*.8bpp.h
+*.lz
+*.fk
+data/banim/*.bin
+
+# =========================
+# Dump Scripts Output
+# =========================
+
+scripts/out/*
+scripts/__pycache__/*
+
+# =========================
+# Game Save Files
+# =========================
+
+*.sav
+
+
+# Created by https://www.gitignore.io/api/c,vim,tags,linux,macos,clion,emacs,python,windows,eclipse,assembler,visualstudio,visualstudiocode
+# Edit at https://www.gitignore.io/?templates=c,vim,tags,linux,macos,clion,emacs,python,windows,eclipse,assembler,visualstudio,visualstudiocode
+
+### Assembler ###
+*.exe
+*.o
+*.obj
+*.bc
+
+### C ###
+# Prerequisites
+*.d
+
+# Object files
+*.ko
+*.elf
+
+# Linker output
+*.ilk
+*.map
+*.exp
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Kernel Module Compile Results
+*.mod*
+*.cmd
+.tmp_versions/
+modules.order
+Module.symvers
+Mkfile.old
+dkms.conf
+
+# Reverse engineering tool
+*.id?
+*.rd?
+*.gdt
+*.gpr
+*.rep
+
+.vscode
+
+###################
+### Symbol file ###
+###################
+
+*.sym
