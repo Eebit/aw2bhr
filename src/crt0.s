@@ -13,7 +13,7 @@ crt0: @ 0x080000C0
 	mov r0, #0x1f
 	msr cpsr_fc, r0
 	ldr sp, _080000F4 @ =0x03007E00
-	ldr r1, _0800021C @ =0x03007FFC
+	ldr r1, _0800021C @ =gUnknown_03007FFC
 	add r0, pc, #0x18 @ =IrqMain
 	str r0, [r1]
 	ldr r1, _08000220 @ =AgbMain
@@ -86,7 +86,7 @@ _080001CC:
 	bic r3, r3, #0xdf
 	orr r3, r3, #0x1f
 	msr cpsr_fc, r3
-	ldr r1, _08000224 @ =0x03002FE0
+	ldr r1, _08000224 @ =gUnknown_03002FE0
 	add r1, r1, r2
 	ldr r0, [r1]
 	stmdb sp!, {lr}
@@ -102,6 +102,6 @@ _080001CC:
 	msr spsr_fc, r0
 	bx lr
 	.align 2, 0
-_0800021C: .4byte 0x03007FFC
+_0800021C: .4byte gUnknown_03007FFC
 _08000220: .4byte AgbMain
-_08000224: .4byte 0x03002FE0
+_08000224: .4byte gUnknown_03002FE0
