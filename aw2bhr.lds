@@ -264,8 +264,9 @@ SECTIONS
 		. = 0x000F78; gUnknown_03000F78 = .;
 		. = 0x000F7C; gUnknown_03000F7C = .;
 		. = 0x000F80; gUnknown_03000F80 = .;
-		. = 0x000F88; gUnknown_03000F88 = .;
-		. = 0x000FA0; gUnknown_03000FA0 = .;
+		. = 0x000F88;
+		. = ALIGN(4); *libgcc.a:dp-bit.o(.bss);
+		. = ALIGN(4); *libgcc.a:fp-bit.o(.bss);
 		. = 0x000FB0; gUnknown_03000FB0 = .;
 		. = 0x000FB1; gUnknown_03000FB1 = .;
 		. = 0x0013B0; gUnknown_030013B0 = .;
@@ -657,6 +658,19 @@ SECTIONS
 		src/crt0.o(.text);
 
 		asm/code.o(.text);
+		*libgcc.a:_call_via_rX.o(.text);
+		*libgcc.a:_divsi3.o(.text);
+		*libgcc.a:_dvmd_tls.o(.text);
+		*libgcc.a:_fixunsdfsi.o(.text);
+		*libgcc.a:_modsi3.o(.text);
+		*libgcc.a:_udivsi3.o(.text);
+		*libgcc.a:_umodsi3.o(.text);
+		*libgcc.a:dp-bit.o(.text);
+		*libgcc.a:fp-bit.o(.text);
+		*libgcc.a:_lshrdi3.o(.text);
+		*libgcc.a:_muldi3.o(.text);
+		*libgcc.a:_negdi2.o(.text);
+		asm/code_0808D680.o(.text);
 
 		/* .data & .rodata */
 		. = ALIGN(4); data/data.o(.data)
