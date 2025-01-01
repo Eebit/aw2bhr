@@ -658,6 +658,8 @@ SECTIONS
 		src/crt0.o(.text);
 
 		asm/code.o(.text);
+		asm/proc.o(.text);
+		asm/code_0801D390.o(.text);
 		*libgcc.a:_call_via_rX.o(.text);
 		*libgcc.a:_divsi3.o(.text);
 		*libgcc.a:_dvmd_tls.o(.text);
