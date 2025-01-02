@@ -1083,7 +1083,52 @@ bool8 sub_0801D238(ProcPtr proc)
     return 1;
 }
 
-extern bool8 (*gUnknown_0848B5DC[])(ProcPtr);
+bool8 (*gUnknown_0848B5DC[])(ProcPtr) =
+{
+    [0x00] = sub_0801CD84,
+    [0x01] = sub_0801CD90,
+    [0x02] = sub_0801CD9C,
+    [0x03] = sub_0801CE14,
+    [0x04] = sub_0801CE24,
+    [0x05] = sub_0801CE40,
+    [0x06] = sub_0801CE5C,
+    [0x07] = sub_0801CE78,
+    [0x08] = sub_0801CE98,
+    [0x09] = sub_0801CEC0,
+    [0x0A] = sub_0801CEDC,
+    [0x0B] = sub_0801CEF8,
+    [0x0C] = sub_0801CF14,
+    [0x0D] = sub_0801CF04,
+    [0x0E] = sub_0801CFC8,
+    [0x0F] = sub_0801CFEC,
+    [0x10] = sub_0801D00C,
+    [0x11] = sub_0801D010,
+    [0x12] = sub_0801D094,
+    [0x13] = sub_0801D000,
+    [0x14] = sub_0801CDE8,
+    [0x15] = sub_0801D088,
+    [0x16] = sub_0801CDB0,
+    [0x17] = sub_0801D050,
+    [0x18] = sub_0801CDC8,
+    [0x19] = sub_0801D214,
+    [0x1A] = sub_0801D238,
+    [0x1B] = sub_0801D0AC,
+    [0x1C] = sub_0801D0C8,
+    [0x1D] = sub_0801D0E4,
+    [0x1E] = sub_0801D104,
+    [0x1F] = sub_0801D124,
+    [0x20] = sub_0801D140,
+    [0x21] = sub_0801D15C,
+    [0x22] = sub_0801D178,
+    [0x23] = sub_0801D194,
+    [0x24] = sub_0801D1B4,
+    [0x25] = sub_0801D1D4,
+    [0x26] = sub_0801D1F4,
+    [0x27] = sub_0801CF28,
+    [0x28] = sub_0801CF5C,
+    [0x29] = sub_0801CF90,
+    [0x2A] = sub_0801CEF8,
+};
 
 void RunProcessScript(ProcPtr proc)
 {
