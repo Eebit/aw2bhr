@@ -660,7 +660,7 @@ SECTIONS
 
 		asm/code.o(.text);
 		src/proc.o(.text);
-		asm/code_0801D390.o(.text);
+		asm/code-0801D390.o(.text);
 		*libgcc.a:_call_via_rX.o(.text);
 		*libgcc.a:_divsi3.o(.text);
 		*libgcc.a:_dvmd_tls.o(.text);
@@ -673,7 +673,7 @@ SECTIONS
 		*libgcc.a:_lshrdi3.o(.text);
 		*libgcc.a:_muldi3.o(.text);
 		*libgcc.a:_negdi2.o(.text);
-		asm/code_0808D680.o(.text);
+		asm/code-0808D680.o(.text);
 
 		/* .rodata */
 		. = ALIGN(4); data/rodata.o(.rodata)
