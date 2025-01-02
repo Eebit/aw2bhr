@@ -15,16 +15,16 @@ enum
     PROC_FLAG_STARTING = (1 << 3),
 };
 
-extern struct Proc sProcArray[PROC_COUNT];
-extern struct Proc * sProcAllocList[PROC_COUNT + 1];
-extern struct Proc ** sProcAllocListHead;
-extern struct Proc * gProcTreeRootArray[8];
+struct Proc EWRAM_DATA sProcArray[PROC_COUNT] = {};
+struct Proc * EWRAM_DATA sProcAllocList[PROC_COUNT + 1] = {};
+struct Proc ** EWRAM_DATA sProcAllocListHead = NULL;
+struct Proc * EWRAM_DATA gProcTreeRootArray[8] = {};
 
-extern int gUnknown_03001FDC;
+s32 IWRAM_DATA gUnknown_03001FDC;
 
 void Proc_Init(void)
 {
-    int i;
+    s32 i;
 
     for (i = 0; i < PROC_COUNT; i++)
     {
@@ -99,7 +99,7 @@ ProcPtr Proc_StartBlocking(const struct ProcCmd * script, ProcPtr parent)
 
     if (!proc->proc_script)
     {
-        return 0;
+        return NULL;
     }
 
     proc->proc_flags |= PROC_FLAG_BLOCKING;
