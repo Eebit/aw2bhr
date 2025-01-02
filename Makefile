@@ -49,8 +49,8 @@ export CPP := $(PREFIX)cpp
 export LD := $(PREFIX)ld
 export STRIP := $(PREFIX)strip
 
-CC1     := $(AGBCC_HOME)/bin/old_agbcc$(EXE)
-CC1_NEW := $(AGBCC_HOME)/bin/agbcc$(EXE)
+CC1_OLD := $(AGBCC_HOME)/bin/old_agbcc$(EXE)
+CC1     := $(AGBCC_HOME)/bin/agbcc$(EXE)
 
 SHASUM ?= sha1sum
 PERL := perl
@@ -60,9 +60,9 @@ PERL := perl
 # ================
 
 CPPFLAGS := -I $(AGBCC_HOME)/include -iquote include -iquote . -nostdinc -undef
-CFLAGS := -g -mthumb-interwork -Wimplicit -Wparentheses -Werror -fhex-asm -ffix-debug-line -O2
+CFLAGS := -g -mthumb-interwork -Wimplicit -Wparentheses -Werror -fhex-asm -ffix-debug-line -fforce-addr -fprologue-bugfix -O2
 ASFLAGS := -mcpu=arm7tdmi -I asm/include -I include
-LDFLAGS := 
+LDFLAGS :=
 
 LDS := $(BUILD_NAME).lds
 C_SRCS := $(shell find $(SRC_DIR) -name *.c)
