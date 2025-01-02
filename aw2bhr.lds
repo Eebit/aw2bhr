@@ -52,10 +52,10 @@ SECTIONS
 		. = 0x00CD0C; gUnknown_0200CD0C = .;
 		. = 0x00CD10; gUnknown_0200CD10 = .;
 		. = 0x00D510; gUnknown_0200D510 = .;
-		. = 0x00D610; gUnknown_0200D610 = .;
-		. = 0x00E390; gUnknown_0200E390 = .;
-		. = 0x00E414; gUnknown_0200E414 = .;
-		. = 0x00E418; gUnknown_0200E418 = .;
+		. = 0x00D610; sProcArray = .;
+		. = 0x00E390; sProcAllocList = .;
+		. = 0x00E414; sProcAllocListHead = .;
+		. = 0x00E418; gProcTreeRootArray = .;
 		. = 0x00E438; gUnknown_0200E438 = .;
 		. = 0x00E440; gUnknown_0200E440 = .;
 		. = 0x00ED20; gUnknown_0200ED20 = .;
