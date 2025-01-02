@@ -590,14 +590,14 @@ void Proc_ForSubtree(ProcPtr proc, ProcFunc func)
 bool8 ProcCmd_End(ProcPtr proc)
 {
     Proc_End(proc);
-    return 0;
+    return FALSE;
 }
 
 bool8 ProcCmd_01_0801CD90(ProcPtr proc)
 {
     struct Proc * p = ((struct Proc *)proc);
     p->proc_scrUnk++;
-    return 1;
+    return TRUE;
 }
 
 bool8 ProcCmd_Call(ProcPtr proc)
@@ -609,7 +609,7 @@ bool8 ProcCmd_Call(ProcPtr proc)
     p->proc_scrUnk++;
     func(p);
 
-    return 1;
+    return TRUE;
 }
 
 bool8 ProcCmd_CallRet(ProcPtr proc)
@@ -644,10 +644,10 @@ bool8 ProcCmd_While(ProcPtr proc)
     if (func(p) == TRUE)
     {
         p->proc_scrUnk--;
-        return 0;
+        return FALSE;
     }
 
-    return 1;
+    return TRUE;
 }
 
 bool8 ProcCmd_Repeat(ProcPtr proc)
@@ -657,7 +657,7 @@ bool8 ProcCmd_Repeat(ProcPtr proc)
     p->proc_idleCb = p->proc_scrUnk->dataPtr;
     p->proc_scrUnk++;
 
-    return 0;
+    return FALSE;
 }
 
 bool8 ProcCmd_SetEndFunc(ProcPtr proc)
@@ -668,7 +668,7 @@ bool8 ProcCmd_SetEndFunc(ProcPtr proc)
     Proc_SetEndFunc(p, func);
     p->proc_scrUnk++;
 
-    return 1;
+    return TRUE;
 }
 
 bool8 ProcCmd_SpawnChild(ProcPtr proc)
@@ -679,7 +679,7 @@ bool8 ProcCmd_SpawnChild(ProcPtr proc)
     Proc_Start(cmd, p);
     p->proc_scrUnk++;
 
-    return 1;
+    return TRUE;
 }
 
 bool8 ProcCmd_SpawnBlockingChild(ProcPtr proc)
@@ -690,7 +690,7 @@ bool8 ProcCmd_SpawnBlockingChild(ProcPtr proc)
     Proc_StartBlocking(cmd, p);
     p->proc_scrUnk++;
 
-    return 0;
+    return FALSE;
 }
 
 bool8 ProcCmd_SpawnBugged(ProcPtr proc)
@@ -704,7 +704,7 @@ bool8 ProcCmd_SpawnBugged(ProcPtr proc)
     Proc_Start(cmd, (ProcPtr)(s32)p->proc_sleepTime);
     p->proc_scrUnk++;
 
-    return 1;
+    return TRUE;
 }
 
 bool8 ProcCmd_WhileExists(ProcPtr proc)
@@ -715,12 +715,12 @@ bool8 ProcCmd_WhileExists(ProcPtr proc)
 
     if (Proc_Exists(cmd) == TRUE)
     {
-        return 0;
+        return FALSE;
     }
 
     p->proc_scrUnk++;
 
-    return 1;
+    return TRUE;
 }
 
 bool8 ProcCmd_EndEach(ProcPtr proc)
@@ -732,7 +732,7 @@ bool8 ProcCmd_EndEach(ProcPtr proc)
 
     p->proc_scrUnk++;
 
-    return 1;
+    return TRUE;
 }
 
 bool8 ProcCmd_BreakEach(ProcPtr proc)
@@ -744,7 +744,7 @@ bool8 ProcCmd_BreakEach(ProcPtr proc)
 
     p->proc_scrUnk++;
 
-    return 1;
+    return TRUE;
 }
 
 bool8 ProcCmd_Label(ProcPtr proc)
@@ -753,7 +753,7 @@ bool8 ProcCmd_Label(ProcPtr proc)
 
     p->proc_scrUnk++;
 
-    return 1;
+    return TRUE;
 }
 
 bool8 ProcCmd_GotoScript(ProcPtr proc)
@@ -763,7 +763,7 @@ bool8 ProcCmd_GotoScript(ProcPtr proc)
     const struct ProcCmd * cmd = p->proc_scrUnk->dataPtr;
     Proc_GotoScript(proc, cmd);
 
-    return 1;
+    return TRUE;
 }
 
 bool8 ProcCmd_Goto(ProcPtr proc)
@@ -772,7 +772,7 @@ bool8 ProcCmd_Goto(ProcPtr proc)
 
     Proc_Goto(proc, p->proc_scrUnk->dataImm);
 
-    return 1;
+    return TRUE;
 }
 
 bool8 ProcCmd_GotoIfYes(ProcPtr proc)
@@ -785,12 +785,12 @@ bool8 ProcCmd_GotoIfYes(ProcPtr proc)
     {
         s16 label = p->proc_scrUnk->dataImm;
         Proc_Goto(p, label);
-        return 1;
+        return TRUE;
     }
 
     p->proc_scrUnk++;
 
-    return 1;
+    return TRUE;
 }
 
 bool8 ProcCmd_GotoIfNo(ProcPtr proc)
@@ -803,12 +803,12 @@ bool8 ProcCmd_GotoIfNo(ProcPtr proc)
     {
         s16 label = p->proc_scrUnk->dataImm;
         Proc_Goto(p, label);
-        return 1;
+        return TRUE;
     }
 
     p->proc_scrUnk++;
 
-    return 1;
+    return TRUE;
 }
 
 bool8 ProcCmd_29_0801CF90(ProcPtr proc)
@@ -818,7 +818,7 @@ bool8 ProcCmd_29_0801CF90(ProcPtr proc)
     sub_0803B5A4(p->proc_scrUnk->dataImm);
     p->proc_scrUnk++;
 
-    return 1;
+    return TRUE;
 }
 
 void SleepRepeatFunc(ProcPtr proc)
@@ -849,7 +849,7 @@ bool8 ProcCmd_Sleep(ProcPtr proc)
 
     (*proc_scrUnk)++;
 
-    return 0;
+    return FALSE;
 }
 
 bool8 ProcCmd_Mark(ProcPtr proc)
@@ -859,7 +859,7 @@ bool8 ProcCmd_Mark(ProcPtr proc)
     p->proc_mark = p->proc_scrUnk->dataImm;
     p->proc_scrUnk++;
 
-    return 1;
+    return TRUE;
 }
 
 bool8 ProcCmd_13_Nop(ProcPtr proc)
@@ -868,12 +868,12 @@ bool8 ProcCmd_13_Nop(ProcPtr proc)
 
     p->proc_scrUnk++;
 
-    return 1;
+    return TRUE;
 }
 
 bool8 ProcCmd_Block(ProcPtr proc)
 {
-    return 0;
+    return FALSE;
 }
 
 bool8 ProcCmd_EndIfDuplicate(ProcPtr proc)
@@ -895,11 +895,11 @@ bool8 ProcCmd_EndIfDuplicate(ProcPtr proc)
     if (j > 1)
     {
         Proc_End(p);
-        return 0;
+        return FALSE;
     }
 
     p->proc_scrUnk++;
-    return 1;
+    return TRUE;
 }
 
 bool8 ProcCmd_EndDuplicates(ProcPtr proc)
@@ -928,7 +928,7 @@ bool8 ProcCmd_EndDuplicates(ProcPtr proc)
 
     p->proc_scrUnk++;
 
-    return 1;
+    return TRUE;
 }
 
 bool8 ProcCmd_15_Nop(ProcPtr proc)
@@ -937,7 +937,7 @@ bool8 ProcCmd_15_Nop(ProcPtr proc)
 
     p->proc_scrUnk++;
 
-    return 1;
+    return TRUE;
 }
 
 bool8 ProcCmd_SetFlag2(ProcPtr proc)
@@ -947,7 +947,7 @@ bool8 ProcCmd_SetFlag2(ProcPtr proc)
     p->proc_flags |= PROC_FLAG_UNK2;
     p->proc_scrUnk++;
 
-    return 1;
+    return TRUE;
 }
 
 bool8 ProcCmd_1B_0801D0AC(ProcPtr proc)
@@ -957,7 +957,7 @@ bool8 ProcCmd_1B_0801D0AC(ProcPtr proc)
     sub_0803B524(p->proc_scrUnk->dataImm);
     p->proc_scrUnk++;
 
-    return 1;
+    return TRUE;
 }
 
 bool8 ProcCmd_1C_0801D0C8(ProcPtr proc)
@@ -967,7 +967,7 @@ bool8 ProcCmd_1C_0801D0C8(ProcPtr proc)
     sub_0803B4DC(p->proc_scrUnk->dataImm);
     p->proc_scrUnk++;
 
-    return 1;
+    return TRUE;
 }
 
 bool8 ProcCmd_1D_0801D0E4(ProcPtr proc)
@@ -977,7 +977,7 @@ bool8 ProcCmd_1D_0801D0E4(ProcPtr proc)
     sub_08013098(p->proc_scrUnk->dataImm, p);
     p->proc_scrUnk++;
 
-    return 0;
+    return FALSE;
 }
 
 bool8 ProcCmd_1E_0801D104(ProcPtr proc)
@@ -987,7 +987,7 @@ bool8 ProcCmd_1E_0801D104(ProcPtr proc)
     sub_080130B0(p->proc_scrUnk->dataImm, p);
     p->proc_scrUnk++;
 
-    return 0;
+    return FALSE;
 }
 
 bool8 ProcCmd_1F_0801D124(ProcPtr proc)
@@ -997,7 +997,7 @@ bool8 ProcCmd_1F_0801D124(ProcPtr proc)
     sub_08011550(p->proc_scrUnk->dataImm);
     p->proc_scrUnk++;
 
-    return 1;
+    return TRUE;
 }
 
 bool8 ProcCmd_20_0801D140(ProcPtr proc)
@@ -1007,7 +1007,7 @@ bool8 ProcCmd_20_0801D140(ProcPtr proc)
     sub_0801156C(p->proc_scrUnk->dataImm);
     p->proc_scrUnk++;
 
-    return 1;
+    return TRUE;
 }
 
 bool8 ProcCmd_21_0801D15C(ProcPtr proc)
@@ -1017,7 +1017,7 @@ bool8 ProcCmd_21_0801D15C(ProcPtr proc)
     sub_08011588(p->proc_scrUnk->dataImm);
     p->proc_scrUnk++;
 
-    return 1;
+    return TRUE;
 }
 
 bool8 ProcCmd_22_0801D178(ProcPtr proc)
@@ -1027,7 +1027,7 @@ bool8 ProcCmd_22_0801D178(ProcPtr proc)
     sub_080115B4(p->proc_scrUnk->dataImm);
     p->proc_scrUnk++;
 
-    return 1;
+    return TRUE;
 }
 
 bool8 ProcCmd_23_0801D194(ProcPtr proc)
@@ -1037,7 +1037,7 @@ bool8 ProcCmd_23_0801D194(ProcPtr proc)
     sub_080115E0(p->proc_scrUnk->dataImm, p);
     p->proc_scrUnk++;
 
-    return 0;
+    return FALSE;
 }
 
 bool8 ProcCmd_24_0801D1B4(ProcPtr proc)
@@ -1047,7 +1047,7 @@ bool8 ProcCmd_24_0801D1B4(ProcPtr proc)
     sub_080115F8(p->proc_scrUnk->dataImm, p);
     p->proc_scrUnk++;
 
-    return 0;
+    return FALSE;
 }
 
 bool8 ProcCmd_25_0801D1D4(ProcPtr proc)
@@ -1057,7 +1057,7 @@ bool8 ProcCmd_25_0801D1D4(ProcPtr proc)
     sub_08011610(p->proc_scrUnk->dataImm, p);
     p->proc_scrUnk++;
 
-    return 0;
+    return FALSE;
 }
 
 bool8 ProcCmd_26_0801D1F4(ProcPtr proc)
@@ -1067,7 +1067,7 @@ bool8 ProcCmd_26_0801D1F4(ProcPtr proc)
     sub_0801163C(p->proc_scrUnk->dataImm, p);
     p->proc_scrUnk++;
 
-    return 0;
+    return FALSE;
 }
 
 bool8 ProcCmd_19_0801D214(ProcPtr proc)
@@ -1079,7 +1079,7 @@ bool8 ProcCmd_19_0801D214(ProcPtr proc)
     sub_080152C0(arg_0, arg_1);
     p->proc_scrUnk++;
 
-    return 1;
+    return TRUE;
 }
 
 bool8 ProcCmd_1A_0801D238(ProcPtr proc)
@@ -1089,15 +1089,15 @@ bool8 ProcCmd_1A_0801D238(ProcPtr proc)
 
     if (sub_08015BD0(arg_0) != -1)
     {
-        return 0;
+        return FALSE;
     }
 
     p->proc_scrUnk++;
 
-    return 1;
+    return TRUE;
 }
 
-bool8 (*gUnknown_0848B5DC[])(ProcPtr) =
+bool8 (*gProcCmdTable[])(ProcPtr) =
 {
     [0x00] = ProcCmd_End,
     [0x01] = ProcCmd_01_0801CD90,
@@ -1163,7 +1163,7 @@ void RunProcessScript(ProcPtr proc)
         return;
     }
 
-    while (gUnknown_0848B5DC[p->proc_scrUnk->opcode](p))
+    while (gProcCmdTable[p->proc_scrUnk->opcode](p))
     {
         if (p->proc_script == NULL || p->proc_lockCnt != 0)
         {
