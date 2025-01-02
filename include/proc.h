@@ -10,6 +10,53 @@ struct ProcCmd
     /* 04 */ const void * dataPtr;
 };
 
+enum
+{
+    PROC_CMD_END = 0x00,
+    PROC_CMD_01 = 0x01,
+    PROC_CMD_CALL = 0x02,
+    PROC_CMD_REPEAT = 0x03,
+    PROC_CMD_ONEND = 0x04,
+    PROC_CMD_START_CHILD = 0x05,
+    PROC_CMD_START_CHILD_BLOCKING = 0x06,
+    PROC_CMD_START_BUGGED = 0x07,
+    PROC_CMD_WHILE_EXISTS = 0x08,
+    PROC_CMD_END_EACH = 0x09,
+    PROC_CMD_BREAK_EACH = 0x0A,
+    PROC_CMD_LABEL = 0x0B,
+    PROC_CMD_GOTO = 0x0C,
+    PROC_CMD_GOTO_SCR = 0x0D,
+    PROC_CMD_SLEEP = 0x0E,
+    PROC_CMD_MARK = 0x0F,
+    PROC_CMD_BLOCK = 0x10,
+    PROC_CMD_END_IF_DUP = 0x11,
+    PROC_CMD_SET_FLAG2 = 0x12,
+    PROC_CMD_13 = 0x13,
+    PROC_CMD_WHILE = 0x14,
+    PROC_CMD_15 = 0x15,
+    PROC_CMD_CALL_RET = 0x16,
+    PROC_CMD_END_DUPS = 0x17,
+    PROC_CMD_CALL_ARG = 0x18,
+    PROC_CMD_19 = 0x19,
+    PROC_CMD_1A = 0x1A,
+    PROC_CMD_1B = 0x1B,
+    PROC_CMD_1C = 0x1C,
+    PROC_CMD_1D = 0x1D,
+    PROC_CMD_1E = 0x1E,
+    PROC_CMD_1F = 0x1F,
+    PROC_CMD_20 = 0x20,
+    PROC_CMD_21 = 0x21,
+    PROC_CMD_22 = 0x22,
+    PROC_CMD_23 = 0x23,
+    PROC_CMD_24 = 0x24,
+    PROC_CMD_25 = 0x25,
+    PROC_CMD_26 = 0x26,
+    PROC_CMD_GOTO_IF_YES = 0x27,
+    PROC_CMD_GOTO_IF_NO = 0x28,
+    PROC_CMD_29 = 0x29,
+    PROC_CMD_2A = 0x2A,
+};
+
 #define PROC_HEADER                                                                        \
     const struct ProcCmd * proc_script; /* pointer to proc script */                        \
     const struct ProcCmd * proc_scrCur; /* pointer to currently executing script command */ \
