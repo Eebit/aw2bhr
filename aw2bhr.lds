@@ -53,6 +53,7 @@ SECTIONS
 		. = 0x00CD10; gUnknown_0200CD10 = .;
 		. = 0x00D510; gUnknown_0200D510 = .;
 		. = 0x00D610; gUnknown_0200D610 = .;
+		. = 0x00E390; gUnknown_0200E390 = .;
 		. = 0x00E414; gUnknown_0200E414 = .;
 		. = 0x00E418; gUnknown_0200E418 = .;
 		. = 0x00E438; gUnknown_0200E438 = .;
@@ -658,7 +659,7 @@ SECTIONS
 		src/crt0.o(.text);
 
 		asm/code.o(.text);
-		asm/proc.o(.text);
+		src/proc.o(.text);
 		asm/code_0801D390.o(.text);
 		*libgcc.a:_call_via_rX.o(.text);
 		*libgcc.a:_divsi3.o(.text);
@@ -674,7 +675,12 @@ SECTIONS
 		*libgcc.a:_negdi2.o(.text);
 		asm/code_0808D680.o(.text);
 
-		/* .data & .rodata */
+		/* .rodata */
+		. = ALIGN(4); data/rodata.o(.rodata)
+		. = ALIGN(4); src/proc.o(.rodata)
+		. = ALIGN(4); data/rodata-0808F098.o(.rodata)
+
+		/* .data */
 		. = ALIGN(4); data/data.o(.data)
 	}
 }
