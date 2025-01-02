@@ -378,9 +378,9 @@ void Proc_Goto(ProcPtr proc, s32 label)
 
     const struct ProcCmd * cmd = p->proc_scrCur;
 
-    for (; cmd->opcode != 0; cmd++)
+    for (; cmd->opcode != PROC_CMD_END; cmd++)
     {
-        if (cmd->opcode != 0xB)
+        if (cmd->opcode != PROC_CMD_LABEL)
         {
             continue;
         }

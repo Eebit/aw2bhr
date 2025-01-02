@@ -57,6 +57,52 @@ enum
     PROC_CMD_2A = 0x2A,
 };
 
+#define PROC_END                          { PROC_CMD_END, 0, 0 }
+// PROC_01
+#define PROC_CALL(func)                   { PROC_CMD_CALL, 0, (func) }
+#define PROC_REPEAT(func)                 { PROC_CMD_REPEAT, 0, (func) }
+#define PROC_ONEND(func)                  { PROC_CMD_ONEND, 0, (func) }
+#define PROC_START_CHILD(procscr)         { PROC_CMD_START_CHILD, 0, (procscr) }
+#define PROC_START_CHILD_LOCKING(procscr) { PROC_CMD_START_CHILD_BLOCKING, 1, (procscr) }
+#define PROC_START_BUGGED(procscr)        { PROC_CMD_START_BUGGED, 0, (procscr) }
+#define PROC_WHILE_EXISTS(procscr)        { PROC_CMD_WHILE_EXISTS, 0, (procscr) }
+#define PROC_END_EACH(procscr)            { PROC_CMD_END_EACH, 0, (procscr) }
+#define PROC_BREAK_EACH(procscr)          { PROC_CMD_BREAK_EACH, 0, (procscr) }
+#define PROC_LABEL(label)                 { PROC_CMD_LABEL, (label), 0 }
+#define PROC_GOTO(label)                  { PROC_CMD_GOTO, (label), 0 }
+#define PROC_GOTO_SCR(procscr)            { PROC_CMD_GOTO_SCR, 0, (procscr) }
+#define PROC_SLEEP(duration)              { PROC_CMD_SLEEP, (duration), 0 }
+#define PROC_MARK(mark)                   { PROC_CMD_MARK, (mark), 0 }
+#define PROC_BLOCK                        { PROC_CMD_BLOCK, 0, 0 }
+#define PROC_END_IF_DUP                   { PROC_CMD_END_IF_DUP, 0, 0 }
+#define PROC_SET_FLAG2                    { PROC_CMD_SET_FLAG2, 0, 0 }
+#define PROC_13                           { PROC_CMD_13, 0, 0 }
+#define PROC_WHILE(func)                  { PROC_CMD_WHILE, 0, (func) }
+#define PROC_15                           { PROC_CMD_15, 0, 0 }
+#define PROC_CALL_2(func)                 { PROC_CMD_CALL_2, 0, (func) }
+#define PROC_END_DUPS                     { PROC_CMD_END_DUPS, 0, 0 }
+#define PROC_CALL_ARG(func, arg)          { PROC_CMD_CALL_ARG, (arg), (func) }
+#define PROC_19                           { PROC_CMD_19, 0, 0 }
+// PROC_1A
+// PROC_1B
+// PROC_1C
+// PROC_1D
+// PROC_1E
+// PROC_1F
+// PROC_20
+// PROC_21
+// PROC_22
+// PROC_23
+// PROC_24
+// PROC_25
+// PROC_26
+// PROC_GOTO_IF_YES
+// PROC_GOTO_IF_NO
+// PROC_29
+// PROC_2A
+
+#define PROC_YIELD                        PROC_SLEEP(0)
+
 #define PROC_HEADER                                                                        \
     const struct ProcCmd * proc_script; /* pointer to proc script */                        \
     const struct ProcCmd * proc_scrCur; /* pointer to currently executing script command */ \
