@@ -685,5 +685,7 @@ SECTIONS
 		. = ALIGN(4); data/data.o(.data)
 		. = ALIGN(4); src/proc.o(.data)
 		. = ALIGN(4); data/data-0848B688.o(.data)
+		. = ALIGN(4); src/title-screen.o(.data)
+		. = ALIGN(4); data/data-08581E70.o(.data)
 	}
 }

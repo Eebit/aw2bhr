@@ -1,6 +1,7 @@
 #include "global.h"
 
 #include "hardware.h"
+#include "oam.h"
 #include "proc.h"
 
 struct ProcTitleScreen
@@ -42,29 +43,24 @@ extern u32 gUnknown_0202F2C4;
 
 extern s32 gUnknown_03004008;
 
-extern u32 gUnknown_08581CB8[]; // unk? maybe SetupBackgrounds input
-
 extern u16 gUnknown_08190B68[]; // pal
 extern u16 gUnknown_0818E164[]; // pal
 extern u8 gUnknown_08186F4C[]; // img
 extern u8 gUnknown_0818DA8C[]; // img
 
-extern u32 gUnknown_08581D40[]; // unk
 extern u8 gUnknown_0818E590[]; // img?
-extern u16 gUnknown_08581DEC[]; // sprite
-extern u16 gUnknown_08581D38[]; // sprite
-extern u16 gUnknown_08581D60[]; // sprite
-extern u16 gUnknown_08581D38[]; // sprite
-extern u16 gUnknown_08581DA4[]; // sprite
-extern u16 gUnknown_08581E06[]; // sprite
+
+extern struct ProcCmd gUnknown_0849E818[];
+
+extern struct ProcCmd gUnknown_08581C90[];
+extern struct ProcCmd gUnknown_08581E10[];
+extern struct ProcCmd gUnknown_08581E28[];
+extern struct ProcCmd gUnknown_08581CF8[];
 
 void sub_0806C9B4(struct ProcTitleScreen * proc)
 {
     proc->unk_2C = 2700;
 }
-
-extern struct ProcCmd gUnknown_08581C90[];
-extern struct ProcCmd gUnknown_08581E10[];
 
 void sub_0806C9C0(struct ProcTitleScreen * proc)
 {
@@ -115,12 +111,47 @@ void sub_0806CA50(struct ProcTitleScreen * proc)
     }
 }
 
-extern struct ProcCmd gUnknown_0849E818[];
+// clang-format off
+
+struct ProcCmd CONST_DATA ProcScr_Unk_08581C68[] =
+{
+    PROC_CALL(sub_0806C9B4),
+    PROC_REPEAT(sub_0806C9C0),
+
+    PROC_CALL(sub_0806CA38),
+    PROC_REPEAT(sub_0806CA50),
+
+    PROC_END,
+};
+
+// clang-format on
 
 void sub_0806CA84(void)
 {
     Proc_Start(gUnknown_0849E818, PROC_TREE_3);
 }
+
+// clang-format off
+
+struct ProcCmd CONST_DATA gUnknown_08581C90[] =
+{
+    PROC_29(2),
+    PROC_1D(30),
+    PROC_END_EACH(gUnknown_08581CF8),
+    PROC_CALL(sub_0806CA84),
+    PROC_END,
+};
+
+// unknown - maybe "SetupBackgrounds" input?
+u32 CONST_DATA gUnknown_08581CB8[] =
+{
+    0x06000000, 0x0600D800, 0x00000000, 0x00000001,
+    0x06000000, 0x0600E000, 0x00000000, 0x00000000,
+    0x06000000, 0x0600E800, 0x00000000, 0x00000000,
+    0x06008000, 0x0600F000, 0x00000000, 0x00000000,
+};
+
+// clang-format on
 
 void sub_0806CA98(struct ProcTitleScreen * proc)
 {
@@ -156,8 +187,6 @@ void sub_0806CA98(struct ProcTitleScreen * proc)
     Proc_Goto(proc, 0);
 }
 
-extern struct ProcCmd gUnknown_08581E28[];
-
 void sub_0806CB5C(struct ProcTitleScreen * proc)
 {
     if (proc->unk_30 != 0)
@@ -182,7 +211,7 @@ void sub_0806CBA8(struct ProcTitleScreen * proc)
 {
     if (proc->unk_30 >= 0)
     {
-        sub_08072C40(0, 0x40 - (proc->unk_30 >> 1), 0);
+        sub_08072C40(0, 64 - (proc->unk_30 >> 1), 0);
 
         if ((proc->unk_30 & 3) == 2)
         {
@@ -202,7 +231,24 @@ void sub_0806CBA8(struct ProcTitleScreen * proc)
     sub_0806CC4C();
 }
 
-extern struct ProcCmd gUnknown_08581CF8[];
+// clang-format off
+
+struct ProcCmd CONST_DATA gUnknown_08581CF8[] =
+{
+    PROC_YIELD,
+    PROC_START_BUGGED(ProcScr_Unk_08581C68, 3),
+
+    PROC_CALL(sub_0806CA98),
+    PROC_REPEAT(sub_0806CB5C),
+
+PROC_LABEL(0),
+    PROC_CALL(sub_0806CB88),
+    PROC_REPEAT(sub_0806CBA8),
+
+    PROC_END,
+};
+
+// clang-format on
 
 void sub_0806CC00(s32 arg0)
 {
@@ -223,6 +269,26 @@ bool8 sub_0806CC34(void)
     return Proc_Exists(gUnknown_08581CF8);
 }
 
+// clang-format off
+
+u16 CONST_DATA gUnknown_08581D38[] =
+{
+    1,
+    OAM0_SHAPE_64x64, OAM1_SIZE_64x64, 0,
+};
+
+u16 CONST_DATA gUnknown_08581D40[] =
+{
+    5,
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16, OAM2_CHR(0x148) + OAM2_PAL(3),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(+32), OAM2_CHR(0x150) + OAM2_PAL(3),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(+64), OAM2_CHR(0x158) + OAM2_PAL(3),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(+96), OAM2_CHR(0x160) + OAM2_PAL(3),
+    OAM0_SHAPE_32x16, OAM1_SIZE_32x16 + OAM1_X(+128), OAM2_CHR(0x168) + OAM2_PAL(3),
+};
+
+// clang-format on
+
 void sub_0806CC4C(void)
 {
     sub_0801BD00(40, 140, gUnknown_08581D40, 0);
@@ -232,6 +298,64 @@ void sub_0806CC64(void)
 {
     sub_08011CAC(gUnknown_0818E590, (void *)0x06010000);
 }
+
+// clang-format off
+
+u16 CONST_DATA gUnknown_08581D60[] =
+{
+    11,
+    OAM0_SHAPE_64x32, OAM1_SIZE_64x32, OAM2_CHR(0x40) + OAM2_PAL(2),
+    OAM0_SHAPE_64x32, OAM1_SIZE_64x32 + OAM1_X(+64), OAM2_CHR(0x60) + OAM2_PAL(2),
+    OAM0_SHAPE_64x32, OAM1_SIZE_64x32 + OAM1_X(+128), OAM2_CHR(0x80) + OAM2_PAL(2),
+    OAM0_SHAPE_32x32, OAM1_SIZE_32x32 + OAM1_X(+192), OAM2_CHR(0xA0) + OAM2_PAL(2),
+    OAM0_SHAPE_32x16 + OAM0_Y(+32), OAM1_SIZE_32x16, OAM2_CHR(0xB0) + OAM2_PAL(2),
+    OAM0_SHAPE_32x16 + OAM0_Y(+32), OAM1_SIZE_32x16 + OAM1_X(+32), OAM2_CHR(0xB8) + OAM2_PAL(2),
+    OAM0_SHAPE_32x16 + OAM0_Y(+32), OAM1_SIZE_32x16 + OAM1_X(+64), OAM2_CHR(0xC0) + OAM2_PAL(2),
+    OAM0_SHAPE_32x16 + OAM0_Y(+32), OAM1_SIZE_32x16 + OAM1_X(+96), OAM2_CHR(0xC8) + OAM2_PAL(2),
+    OAM0_SHAPE_32x16 + OAM0_Y(+32), OAM1_SIZE_32x16 + OAM1_X(+128), OAM2_CHR(0xD0) + OAM2_PAL(2),
+    OAM0_SHAPE_32x16 + OAM0_Y(+32), OAM1_SIZE_32x16 + OAM1_X(+160), OAM2_CHR(0xD8) + OAM2_PAL(2),
+    OAM0_SHAPE_32x16 + OAM0_Y(+32), OAM1_SIZE_32x16 + OAM1_X(+192), OAM2_CHR(0xE0) + OAM2_PAL(2),
+};
+
+u16 CONST_DATA gUnknown_08581DA4[] =
+{
+    3,
+    OAM0_SHAPE_64x32, OAM1_SIZE_64x32, OAM2_CHR(0xE8) + OAM2_PAL(1),
+    OAM0_SHAPE_64x32, OAM1_SIZE_64x32 + OAM1_X(+64), OAM2_CHR(0x108) + OAM2_PAL(1),
+    OAM0_SHAPE_64x32, OAM1_SIZE_64x32 + OAM1_X(+128), OAM2_CHR(0x128) + OAM2_PAL(1),
+};
+
+u16 CONST_DATA gUnknown_08581DB8[] = { 0 }; // TODO: padding?
+
+u16 CONST_DATA gUnknown_08581DBA[] =
+{
+    8,
+    OAM0_SHAPE_16x8 + OAM0_BLEND, OAM1_SIZE_16x8, OAM2_CHR(0x1C0),
+    OAM0_SHAPE_16x8 + OAM0_BLEND, OAM1_SIZE_16x8 + OAM1_X(+16), OAM2_CHR(0x1C2),
+    OAM0_SHAPE_16x8 + OAM0_BLEND, OAM1_SIZE_16x8 + OAM1_X(+32), OAM2_CHR(0x1C4),
+    OAM0_SHAPE_16x8 + OAM0_BLEND, OAM1_SIZE_16x8 + OAM1_X(+48), OAM2_CHR(0x1C6),
+    OAM0_SHAPE_16x8 + OAM0_BLEND, OAM1_SIZE_16x8 + OAM1_X(+64) + OAM1_HFLIP, OAM2_CHR(0x1C6),
+    OAM0_SHAPE_16x8 + OAM0_BLEND, OAM1_SIZE_16x8 + OAM1_X(+80) + OAM1_HFLIP, OAM2_CHR(0x1C4),
+    OAM0_SHAPE_16x8 + OAM0_BLEND, OAM1_SIZE_16x8 + OAM1_X(+96) + OAM1_HFLIP, OAM2_CHR(0x1C2),
+    OAM0_SHAPE_16x8 + OAM0_BLEND, OAM1_SIZE_16x8 + OAM1_X(+112) + OAM1_HFLIP, OAM2_CHR(0x1C0),
+};
+
+u16 CONST_DATA gUnknown_08581DEC[] =
+{
+    4,
+    OAM0_SHAPE_32x16 + OAM0_BLEND, OAM1_SIZE_32x16, OAM2_CHR(0x170) + OAM2_PAL(3),
+    OAM0_SHAPE_32x16 + OAM0_BLEND, OAM1_SIZE_32x16 + OAM1_X(+32), OAM2_CHR(0x178) + OAM2_PAL(3),
+    OAM0_SHAPE_32x16 + OAM0_BLEND, OAM1_SIZE_32x16 + OAM1_X(+64), OAM2_CHR(0x180) + OAM2_PAL(3),
+    OAM0_SHAPE_32x16 + OAM0_BLEND, OAM1_SIZE_32x16 + OAM1_X(+96), OAM2_CHR(0x188) + OAM2_PAL(3),
+};
+
+u16 CONST_DATA gUnknown_08581E06[] =
+{
+    1,
+    OAM0_SHAPE_16x8, OAM1_SIZE_16x8, OAM2_CHR(0x190) + OAM2_PAL(1),
+};
+
+// clang-format on
 
 void sub_0806CC7C(struct UnkProc08581E10 * proc)
 {
@@ -282,6 +406,18 @@ void sub_0806CCE4(struct UnkProc08581E10 * proc)
 
     sub_0801BEBC(0, 56, 100, gUnknown_08581DEC, 0); // press start sprite
 }
+
+// clang-format off
+
+struct ProcCmd CONST_DATA gUnknown_08581E10[] =
+{
+    PROC_CALL(sub_0806CC7C),
+    PROC_REPEAT(sub_0806CCE4),
+
+    PROC_END,
+};
+
+// clang-format on
 
 void sub_0806CD7C(struct UnkProc08581E28 * proc)
 {
@@ -378,3 +514,25 @@ void sub_0806CF28(struct UnkProc08581E28 * proc)
     sub_0801BEBC(0, 22, 15, gUnknown_08581DA4, 0); // Advance Wars
     sub_0801BEBC(0, 202, 34, gUnknown_08581E06, 0); // TM
 }
+
+// clang-format off
+
+struct ProcCmd CONST_DATA gUnknown_08581E28[] =
+{
+    PROC_YIELD,
+
+    PROC_CALL(sub_0806CD7C),
+
+    PROC_REPEAT(sub_0806CDA4),
+    PROC_REPEAT(sub_0806CE5C),
+
+PROC_LABEL(0),
+    PROC_START_CHILD(gUnknown_08581E10),
+
+    PROC_CALL(sub_0806CF04),
+    PROC_REPEAT(sub_0806CF28),
+
+    PROC_END,
+};
+
+// clang-format on

@@ -64,7 +64,7 @@ enum
 #define PROC_ONEND(func)                  { PROC_CMD_ONEND, 0, (func) }
 #define PROC_START_CHILD(procscr)         { PROC_CMD_START_CHILD, 0, (procscr) }
 #define PROC_START_CHILD_LOCKING(procscr) { PROC_CMD_START_CHILD_BLOCKING, 1, (procscr) }
-#define PROC_START_BUGGED(procscr)        { PROC_CMD_START_BUGGED, 0, (procscr) }
+#define PROC_START_BUGGED(procscr, arg)   { PROC_CMD_START_BUGGED, (arg), (procscr) }
 #define PROC_WHILE_EXISTS(procscr)        { PROC_CMD_WHILE_EXISTS, 0, (procscr) }
 #define PROC_END_EACH(procscr)            { PROC_CMD_END_EACH, 0, (procscr) }
 #define PROC_BREAK_EACH(procscr)          { PROC_CMD_BREAK_EACH, 0, (procscr) }
@@ -86,7 +86,7 @@ enum
 // PROC_1A
 // PROC_1B
 // PROC_1C
-// PROC_1D
+#define PROC_1D(arg)                      { PROC_CMD_1D, (arg), 0 }
 // PROC_1E
 // PROC_1F
 // PROC_20
@@ -98,7 +98,7 @@ enum
 // PROC_26
 // PROC_GOTO_IF_YES
 // PROC_GOTO_IF_NO
-// PROC_29
+#define PROC_29(arg)                      { PROC_CMD_29, (arg), 0 }
 // PROC_2A
 
 #define PROC_YIELD                        PROC_SLEEP(0)
