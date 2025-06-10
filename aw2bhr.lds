@@ -660,7 +660,7 @@ SECTIONS
 		asm/code.o(.text);
 		src/proc.o(.text);
 		asm/code-0801D390.o(.text);
-		asm/title-screen.o(.text);
+		src/title-screen.o(.text);
 		asm/code-0806CFC8.o(.text);
 		*libgcc.a:_call_via_rX.o(.text);
 		*libgcc.a:_divsi3.o(.text);

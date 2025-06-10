@@ -127,6 +127,18 @@ struct Proc
     /* 29 */ STRUCT_PAD(0x29, 0x6C);
 };
 
+#define PROC_TREE_VSYNC ((ProcPtr) 0)
+#define PROC_TREE_1     ((ProcPtr) 1)
+#define PROC_TREE_2     ((ProcPtr) 2)
+#define PROC_TREE_3     ((ProcPtr) 3)
+#define PROC_TREE_4     ((ProcPtr) 4)
+#define PROC_TREE_5     ((ProcPtr) 5)
+#define PROC_TREE_6     ((ProcPtr) 6)
+#define PROC_TREE_7     ((ProcPtr) 7)
+#define PROC_IS_ROOT(aProc) ((uintptr_t)aProc <= (u32)PROC_TREE_7)
+
+#define ROOT_PROC(treenum) (*(gProcTreeRootArray + (treenum)))
+
 void Proc_Init(void);
 ProcPtr Proc_Start(const struct ProcCmd * script, ProcPtr parent);
 ProcPtr Proc_StartBlocking(const struct ProcCmd * script, ProcPtr parent);
