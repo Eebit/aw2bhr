@@ -324,7 +324,7 @@ SECTIONS
 		. = 0x0020B0; gUnknown_030020B0 = .;
 		. = 0x0020B4; gUnknown_030020B4 = .;
 		. = 0x0020B8; gUnknown_030020B8 = .;
-		. = 0x0020C0; gUnknown_030020C0 = .;
+		. = 0x0020C0; gPal = .;
 		. = 0x0024C0; gUnknown_030024C0 = .;
 		. = 0x0024C4; gUnknown_030024C4 = .;
 		. = 0x0024C8; gUnknown_030024C8 = .;
@@ -362,7 +362,7 @@ SECTIONS
 		. = 0x002B70; gUnknown_03002B70 = .;
 		. = 0x002B80; gUnknown_03002B80 = .;
 		. = 0x002EDC; gUnknown_03002EDC = .;
-		. = 0x002EE0; gUnknown_03002EE0 = .;
+		. = 0x002EE0; gpKeySt = .;
 		. = 0x002EE4; gUnknown_03002EE4 = .;
 		. = 0x002EE8; gUnknown_03002EE8 = .;
 		. = 0x002EEC; gUnknown_03002EEC = .;
@@ -414,7 +414,7 @@ SECTIONS
 		. = 0x0030C0; gUnknown_030030C0 = .;
 		. = 0x0030C4; gUnknown_030030C4 = .;
 		. = 0x0030C8; gUnknown_030030C8 = .;
-		. = 0x0030CC; gUnknown_030030CC = .;
+		. = 0x0030CC; gDispIo = .;
 		. = 0x0030D0; gUnknown_030030D0 = .;
 		. = 0x0030D4; gUnknown_030030D4 = .;
 		. = 0x0030D8; gUnknown_030030D8 = .;
@@ -660,6 +660,8 @@ SECTIONS
 		asm/code.o(.text);
 		src/proc.o(.text);
 		asm/code-0801D390.o(.text);
+		src/title-screen.o(.text);
+		asm/code-0806CFC8.o(.text);
 		*libgcc.a:_call_via_rX.o(.text);
 		*libgcc.a:_divsi3.o(.text);
 		*libgcc.a:_dvmd_tls.o(.text);
@@ -683,5 +685,7 @@ SECTIONS
 		. = ALIGN(4); data/data.o(.data)
 		. = ALIGN(4); src/proc.o(.data)
 		. = ALIGN(4); data/data-0848B688.o(.data)
+		. = ALIGN(4); src/title-screen.o(.data)
+		. = ALIGN(4); data/data-08581E70.o(.data)
 	}
 }

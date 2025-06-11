@@ -40,8 +40,8 @@ gUnknown_0808F0F8:  @ 0x0808F0F8
 gUnknown_0808F0FC:  @ 0x0808F0FC
 	.incbin "baserom.gba", 0x8F0FC, 0x4    @ 0x8F100 - 0x8F0FC
 
-	.global gUnknown_0808F100
-gUnknown_0808F100:  @ 0x0808F100
+	.global gSinLut
+gSinLut:  @ 0x0808F100
 	.incbin "baserom.gba", 0x8F100, 0x280    @ 0x8F380 - 0x8F100
 
 	.global gUnknown_0808F380

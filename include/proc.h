@@ -19,7 +19,7 @@ enum
     PROC_CMD_ONEND = 0x04,
     PROC_CMD_START_CHILD = 0x05,
     PROC_CMD_START_CHILD_BLOCKING = 0x06,
-    PROC_CMD_START_BUGGED = 0x07,
+    PROC_CMD_START_BUGGED = 0x07, // PROC_START_MAIN
     PROC_CMD_WHILE_EXISTS = 0x08,
     PROC_CMD_END_EACH = 0x09,
     PROC_CMD_BREAK_EACH = 0x0A,
@@ -49,8 +49,8 @@ enum
     PROC_CMD_22 = 0x22,
     PROC_CMD_23 = 0x23,
     PROC_CMD_24 = 0x24,
-    PROC_CMD_25 = 0x25,
-    PROC_CMD_26 = 0x26,
+    PROC_CMD_25 = 0x25, // PROC_FADE_TO_WHITE
+    PROC_CMD_26 = 0x26, // PROC_FADE_FROM_WHITE
     PROC_CMD_GOTO_IF_YES = 0x27,
     PROC_CMD_GOTO_IF_NO = 0x28,
     PROC_CMD_29 = 0x29,
@@ -64,7 +64,7 @@ enum
 #define PROC_ONEND(func)                  { PROC_CMD_ONEND, 0, (func) }
 #define PROC_START_CHILD(procscr)         { PROC_CMD_START_CHILD, 0, (procscr) }
 #define PROC_START_CHILD_LOCKING(procscr) { PROC_CMD_START_CHILD_BLOCKING, 1, (procscr) }
-#define PROC_START_BUGGED(procscr)        { PROC_CMD_START_BUGGED, 0, (procscr) }
+#define PROC_START_BUGGED(procscr, arg)   { PROC_CMD_START_BUGGED, (arg), (procscr) }
 #define PROC_WHILE_EXISTS(procscr)        { PROC_CMD_WHILE_EXISTS, 0, (procscr) }
 #define PROC_END_EACH(procscr)            { PROC_CMD_END_EACH, 0, (procscr) }
 #define PROC_BREAK_EACH(procscr)          { PROC_CMD_BREAK_EACH, 0, (procscr) }
@@ -86,7 +86,7 @@ enum
 // PROC_1A
 // PROC_1B
 // PROC_1C
-// PROC_1D
+#define PROC_1D(arg)                      { PROC_CMD_1D, (arg), 0 }
 // PROC_1E
 // PROC_1F
 // PROC_20
@@ -98,7 +98,7 @@ enum
 // PROC_26
 // PROC_GOTO_IF_YES
 // PROC_GOTO_IF_NO
-// PROC_29
+#define PROC_29(arg)                      { PROC_CMD_29, (arg), 0 }
 // PROC_2A
 
 #define PROC_YIELD                        PROC_SLEEP(0)
@@ -126,6 +126,18 @@ struct Proc
     /* 00 */ PROC_HEADER;
     /* 29 */ STRUCT_PAD(0x29, 0x6C);
 };
+
+#define PROC_TREE_VSYNC ((ProcPtr) 0)
+#define PROC_TREE_1     ((ProcPtr) 1)
+#define PROC_TREE_2     ((ProcPtr) 2)
+#define PROC_TREE_3     ((ProcPtr) 3)
+#define PROC_TREE_4     ((ProcPtr) 4)
+#define PROC_TREE_5     ((ProcPtr) 5)
+#define PROC_TREE_6     ((ProcPtr) 6)
+#define PROC_TREE_7     ((ProcPtr) 7)
+#define PROC_IS_ROOT(aProc) ((uintptr_t)aProc <= (u32)PROC_TREE_7)
+
+#define ROOT_PROC(treenum) (*(gProcTreeRootArray + (treenum)))
 
 void Proc_Init(void);
 ProcPtr Proc_Start(const struct ProcCmd * script, ProcPtr parent);

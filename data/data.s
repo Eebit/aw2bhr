@@ -2136,28 +2136,28 @@ gUnknown_081866F8:  @ 0x081866F8
 gUnknown_08186D4C:  @ 0x08186D4C
 	.incbin "baserom.gba", 0x186D4C, 0x200    @ 0x186F4C - 0x186D4C
 
-	.global gUnknown_08186F4C
-gUnknown_08186F4C:  @ 0x08186F4C
+	.global Img_TitleScreenBg
+Img_TitleScreenBg:  @ 0x08186F4C
 	.incbin "baserom.gba", 0x186F4C, 0x6B40    @ 0x18DA8C - 0x186F4C
 
-	.global gUnknown_0818DA8C
-gUnknown_0818DA8C:  @ 0x0818DA8C
+	.global Img_0818DA8C
+Img_0818DA8C:  @ 0x0818DA8C
 	.incbin "baserom.gba", 0x18DA8C, 0x6D8    @ 0x18E164 - 0x18DA8C
 
-	.global gUnknown_0818E164
-gUnknown_0818E164:  @ 0x0818E164
+	.global Pal_TitleScreenBg
+Pal_TitleScreenBg:  @ 0x0818E164
 	.incbin "baserom.gba", 0x18E164, 0x200    @ 0x18E364 - 0x18E164
 
 	.global gUnknown_0818E364
 gUnknown_0818E364:  @ 0x0818E364
 	.incbin "baserom.gba", 0x18E364, 0x22C    @ 0x18E590 - 0x18E364
 
-	.global gUnknown_0818E590
-gUnknown_0818E590:  @ 0x0818E590
+	.global Img_TitleScreenSprites
+Img_TitleScreenSprites:  @ 0x0818E590
 	.incbin "baserom.gba", 0x18E590, 0x25D8    @ 0x190B68 - 0x18E590
 
-	.global gUnknown_08190B68
-gUnknown_08190B68:  @ 0x08190B68
+	.global Pal_TitleScreenSprites
+Pal_TitleScreenSprites:  @ 0x08190B68
 	.incbin "baserom.gba", 0x190B68, 0xD3C    @ 0x1918A4 - 0x190B68
 
 	.global gUnknown_081918A4
