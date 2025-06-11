@@ -940,8 +940,8 @@ gUnknown_0849E7D8:  @ 0x0849E7D8
 gUnknown_0849E7F8:  @ 0x0849E7F8
 	.incbin "baserom.gba", 0x49E7F8, 0x20    @ 0x49E818 - 0x49E7F8
 
-	.global gUnknown_0849E818
-gUnknown_0849E818:  @ 0x0849E818
+	.global ProcScr_MainMenu
+ProcScr_MainMenu:  @ 0x0849E818
 	.incbin "baserom.gba", 0x49E818, 0x260    @ 0x49EA78 - 0x49E818
 
 	.global gUnknown_0849EA78

@@ -145,7 +145,7 @@ struct DispIo
 extern u16 gUnknown_03002020;
 extern u16 gUnknown_03002B28;
 extern u8 gUnknown_03002B6C;
-extern struct DispIo gUnknown_030030CC;
+extern struct DispIo gDispIo;
 
 struct KeySt
 {
@@ -180,9 +180,9 @@ enum
     BG_INVALID = -1,
 };
 
-extern struct KeySt * gUnknown_03002EE0;
+extern struct KeySt * gpKeySt;
 
-extern u16 gUnknown_030020C0[];
+extern u16 gPal[];
 
 #define RGB_GET_RED(color) ((color) & 0x1F)
 #define RGB_GET_GREEN(color) (((color) >> 5) & 0x1F)
@@ -207,76 +207,76 @@ extern u16 gUnknown_030020C0[];
 #define OBPAL_OFFSET(obpal) PAL_OFFSET(0x10 + (obpal))
 
 #define PAL_BUF_COLOR(buf, palid, colornum) buf[PAL_COLOR_OFFSET((palid), (colornum))]
-#define PAL_COLOR(palid, colornum) PAL_BUF_COLOR(gUnknown_030020C0, palid, colornum)
+#define PAL_COLOR(palid, colornum) PAL_BUF_COLOR(gPal, palid, colornum)
 #define PAL_BG_COLOR(palid, colornum) PAL_COLOR(palid, colornum)
 #define PAL_OBJ_COLOR(palid, colornum) PAL_COLOR((palid) + 0x10, colornum)
 
 #define PAL_BG(palid) (&PAL_BG_COLOR(palid, 0))
 #define PAL_OBJ(palid) (&PAL_OBJ_COLOR(palid, 0))
 
-#define SIN_Q12(angle) (gUnknown_0808F100[(angle) & 0xFF])
-#define COS_Q12(angle) (gUnknown_0808F100[0x40 + ((angle) & 0xFF)])
+#define SIN_Q12(angle) (gSinLut[(angle) & 0xFF])
+#define COS_Q12(angle) (gSinLut[0x40 + ((angle) & 0xFF)])
 
 #define ApplyPalettes(src, num, count) ApplyPaletteExt((src), 0x20 * (num), 0x20 * (count))
 #define ApplyPalette(src, num) ApplyPalettes((src), (num), 1)
 
 #define SetDispEnable(bg0, bg1, bg2, bg3, obj) \
-    gUnknown_030030CC.disp_ct.bg0_enable = (bg0); \
-    gUnknown_030030CC.disp_ct.bg1_enable = (bg1); \
-    gUnknown_030030CC.disp_ct.bg2_enable = (bg2); \
-    gUnknown_030030CC.disp_ct.bg3_enable = (bg3); \
-    gUnknown_030030CC.disp_ct.obj_enable = (obj)
+    gDispIo.disp_ct.bg0_enable = (bg0); \
+    gDispIo.disp_ct.bg1_enable = (bg1); \
+    gDispIo.disp_ct.bg2_enable = (bg2); \
+    gDispIo.disp_ct.bg3_enable = (bg3); \
+    gDispIo.disp_ct.obj_enable = (obj)
 
 #define SetWinEnable(win0, win1, objwin) \
-    gUnknown_030030CC.disp_ct.win0_enable = (win0); \
-    gUnknown_030030CC.disp_ct.win1_enable = (win1); \
-    gUnknown_030030CC.disp_ct.objwin_enable = (objwin)
+    gDispIo.disp_ct.win0_enable = (win0); \
+    gDispIo.disp_ct.win1_enable = (win1); \
+    gDispIo.disp_ct.objwin_enable = (objwin)
 
 #define SetWin0Box(left, top, right, bottom) \
-    gUnknown_030030CC.win0_left = (left); \
-    gUnknown_030030CC.win0_top = (top); \
-    gUnknown_030030CC.win0_right = (right); \
-    gUnknown_030030CC.win0_bottom = (bottom)
+    gDispIo.win0_left = (left); \
+    gDispIo.win0_top = (top); \
+    gDispIo.win0_right = (right); \
+    gDispIo.win0_bottom = (bottom)
 
 #define SetWin1Box(left, top, right, bottom) \
-    gUnknown_030030CC.win1_left = (left); \
-    gUnknown_030030CC.win1_top = (top); \
-    gUnknown_030030CC.win1_right = (right); \
-    gUnknown_030030CC.win1_bottom = (bottom)
+    gDispIo.win1_left = (left); \
+    gDispIo.win1_top = (top); \
+    gDispIo.win1_right = (right); \
+    gDispIo.win1_bottom = (bottom)
 
 #define SetWin0Layers(bg0, bg1, bg2, bg3, obj) \
-    gUnknown_030030CC.win_ct.win0_enable_bg0 = (bg0); \
-    gUnknown_030030CC.win_ct.win0_enable_bg1 = (bg1); \
-    gUnknown_030030CC.win_ct.win0_enable_bg2 = (bg2); \
-    gUnknown_030030CC.win_ct.win0_enable_bg3 = (bg3); \
-    gUnknown_030030CC.win_ct.win0_enable_obj = (obj)
+    gDispIo.win_ct.win0_enable_bg0 = (bg0); \
+    gDispIo.win_ct.win0_enable_bg1 = (bg1); \
+    gDispIo.win_ct.win0_enable_bg2 = (bg2); \
+    gDispIo.win_ct.win0_enable_bg3 = (bg3); \
+    gDispIo.win_ct.win0_enable_obj = (obj)
 
 #define SetWin1Layers(bg0, bg1, bg2, bg3, obj) \
-    gUnknown_030030CC.win_ct.win1_enable_bg0 = (bg0); \
-    gUnknown_030030CC.win_ct.win1_enable_bg1 = (bg1); \
-    gUnknown_030030CC.win_ct.win1_enable_bg2 = (bg2); \
-    gUnknown_030030CC.win_ct.win1_enable_bg3 = (bg3); \
-    gUnknown_030030CC.win_ct.win1_enable_obj = (obj)
+    gDispIo.win_ct.win1_enable_bg0 = (bg0); \
+    gDispIo.win_ct.win1_enable_bg1 = (bg1); \
+    gDispIo.win_ct.win1_enable_bg2 = (bg2); \
+    gDispIo.win_ct.win1_enable_bg3 = (bg3); \
+    gDispIo.win_ct.win1_enable_obj = (obj)
 
 #define SetWObjLayers(bg0, bg1, bg2, bg3, obj) \
-    gUnknown_030030CC.win_ct.wobj_enable_bg0 = (bg0); \
-    gUnknown_030030CC.win_ct.wobj_enable_bg1 = (bg1); \
-    gUnknown_030030CC.win_ct.wobj_enable_bg2 = (bg2); \
-    gUnknown_030030CC.win_ct.wobj_enable_bg3 = (bg3); \
-    gUnknown_030030CC.win_ct.wobj_enable_obj = (obj)
+    gDispIo.win_ct.wobj_enable_bg0 = (bg0); \
+    gDispIo.win_ct.wobj_enable_bg1 = (bg1); \
+    gDispIo.win_ct.wobj_enable_bg2 = (bg2); \
+    gDispIo.win_ct.wobj_enable_bg3 = (bg3); \
+    gDispIo.win_ct.wobj_enable_obj = (obj)
 
 #define SetWOutLayers(bg0, bg1, bg2, bg3, obj) \
-    gUnknown_030030CC.win_ct.wout_enable_bg0 = (bg0); \
-    gUnknown_030030CC.win_ct.wout_enable_bg1 = (bg1); \
-    gUnknown_030030CC.win_ct.wout_enable_bg2 = (bg2); \
-    gUnknown_030030CC.win_ct.wout_enable_bg3 = (bg3); \
-    gUnknown_030030CC.win_ct.wout_enable_obj = (obj)
+    gDispIo.win_ct.wout_enable_bg0 = (bg0); \
+    gDispIo.win_ct.wout_enable_bg1 = (bg1); \
+    gDispIo.win_ct.wout_enable_bg2 = (bg2); \
+    gDispIo.win_ct.wout_enable_bg3 = (bg3); \
+    gDispIo.win_ct.wout_enable_obj = (obj)
 
 #define SetBlendConfig(eff, ca, cb, cy) \
-    gUnknown_030030CC.blend_ct.effect = (eff); \
-    gUnknown_030030CC.blend_coef_a = (ca); \
-    gUnknown_030030CC.blend_coef_b = (cb); \
-    gUnknown_030030CC.blend_y = (cy)
+    gDispIo.blend_ct.effect = (eff); \
+    gDispIo.blend_coef_a = (ca); \
+    gDispIo.blend_coef_b = (cb); \
+    gDispIo.blend_y = (cy)
 
 #define SetBlendAlpha(ca, cb) \
     SetBlendConfig(BLEND_EFFECT_ALPHA, (ca), (cb), 0)
@@ -291,27 +291,27 @@ extern u16 gUnknown_030020C0[];
     SetBlendConfig(BLEND_EFFECT_NONE, 0x10, 0, 0)
 
 #define SetBlendTargetA(bg0, bg1, bg2, bg3, obj) \
-    gUnknown_030030CC.blend_ct.target1_enable_bg0 = (bg0); \
-    gUnknown_030030CC.blend_ct.target1_enable_bg1 = (bg1); \
-    gUnknown_030030CC.blend_ct.target1_enable_bg2 = (bg2); \
-    gUnknown_030030CC.blend_ct.target1_enable_bg3 = (bg3); \
-    gUnknown_030030CC.blend_ct.target1_enable_obj = (obj)
+    gDispIo.blend_ct.target1_enable_bg0 = (bg0); \
+    gDispIo.blend_ct.target1_enable_bg1 = (bg1); \
+    gDispIo.blend_ct.target1_enable_bg2 = (bg2); \
+    gDispIo.blend_ct.target1_enable_bg3 = (bg3); \
+    gDispIo.blend_ct.target1_enable_obj = (obj)
 
 #define SetBlendTargetB(bg0, bg1, bg2, bg3, obj) \
-    gUnknown_030030CC.blend_ct.target2_enable_bg0 = (bg0); \
-    gUnknown_030030CC.blend_ct.target2_enable_bg1 = (bg1); \
-    gUnknown_030030CC.blend_ct.target2_enable_bg2 = (bg2); \
-    gUnknown_030030CC.blend_ct.target2_enable_bg3 = (bg3); \
-    gUnknown_030030CC.blend_ct.target2_enable_obj = (obj)
+    gDispIo.blend_ct.target2_enable_bg0 = (bg0); \
+    gDispIo.blend_ct.target2_enable_bg1 = (bg1); \
+    gDispIo.blend_ct.target2_enable_bg2 = (bg2); \
+    gDispIo.blend_ct.target2_enable_bg3 = (bg3); \
+    gDispIo.blend_ct.target2_enable_obj = (obj)
 
 #define SetBlendBackdropA(enable) \
-    gUnknown_030030CC.blend_ct.target1_enable_bd = (enable)
+    gDispIo.blend_ct.target1_enable_bd = (enable)
 
 #define SetBlendBackdropB(enable) \
-    gUnknown_030030CC.blend_ct.target2_enable_bd = (enable)
+    gDispIo.blend_ct.target2_enable_bd = (enable)
 
 
-extern const s16 gUnknown_0808F100[0x40]; // gSinLut
+extern const s16 gSinLut[0x40];
 extern const s16 gCosLut[0x100];
 
 #endif // HARDWARE_H
